@@ -5,6 +5,7 @@ var has = require('lodash.has')
 module.exports = function(options) {
 
     var RabbitClient = get(options, 'RabbitClient') || require('rascal')
+    var components = get(options, 'components') || {}
     var broker
     var config
     var logger
@@ -24,7 +25,7 @@ module.exports = function(options) {
         logger.info('Connecting to rabbitmq')
         var conf = RabbitClient.withDefaultConfig(config);
 
-        RabbitClient.createBroker(conf, options.components || {}, function(err, _broker) {
+        RabbitClient.createBroker(conf, components, function(err, _broker) {
             broker = _broker;
             cb(err, { broker: broker });
         })
