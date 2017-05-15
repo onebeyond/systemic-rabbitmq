@@ -1,0 +1,23 @@
+{
+  "name": "systemic-rabbitmq",
+  "version": "1.0.0",
+  "description": "A systemic rabbitmq component",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guidesmiths/systemic-rabbitmq.git"
+  },
+  "author": "Felipe Polo Ruiz <felipe.polo@gmail.com> (https://github.com/feliun)",
+  "keywords": [
+    "systemic",
+    "rabbitmq"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guidesmiths/systemic-rabbitmq/issues"
+  },
+  "homepage": "https://github.com/guidesmiths/systemic-rabbitmq#readme",
+  "dependencies": {
+    "rascal": "^1.1.0"
+  }
+}
