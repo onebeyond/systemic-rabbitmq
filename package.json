@@ -21,6 +21,12 @@
     "async": "^2.4.0",
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
-    "rascal": "^1.1.0"
-  }
+    "rascal": "^1.1.0",
+    "snyk": "^1.316.1"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
