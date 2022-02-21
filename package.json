@@ -21,6 +21,6 @@
     "async": "^2.4.0",
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
-    "rascal": "^1.1.0"
+    "rascal": "^4.3.0"
   }
 }
