@@ -1,44 +1,57 @@
-var async = require('async')
-var get = require('lodash.get')
-var has = require('lodash.has')
+const { has, get } = require('lodash');
 
-module.exports = function(options) {
+module.exports = options => {
 
-    var RabbitClient = get(options, 'RabbitClient') || require('rascal')
-    var components = get(options, 'components') || {}
-    var broker
-    var config
-    var logger
+  const RabbitClient = get(options, 'RabbitClient') || require('rascal');
+  let broker;
+  let config;
+  let logger;
 
-    function init(dependencies, cb) {
-        config = dependencies.config
-        logger = dependencies.logger || console
-        cb()
+  const init = dependencies => {
+    config = { ...dependencies.config };
+    logger = ({ ...dependencies.logger }) || console;
+
+    if (!dependencies.logger) {
+      logger.info = console.log;
     }
+  };
 
-    function validate(cb) {
-        if (!has(config, 'vhosts')) return cb(new Error('config.vhosts is required'))
-        cb()
+  const validate = () => {
+    if (!has(config, 'vhosts'))
+      throw new Error('config.vhosts is required');
+  };
+
+  const start = async dependencies => {
+    try {
+      init(dependencies);
+      validate();
+
+      logger.info('Connecting to rabbitmq');
+      const conf = RabbitClient.withDefaultConfig(config);
+
+      broker = await RabbitClient?.BrokerAsPromised?.create(conf);
+
+      if (!broker) {
+        throw new Error('Broker could not be created');
+      }
+console.log('broker', broker)
+      return broker;
+    } catch (error) {
+      throw new Error(error);
     }
+  };
 
-    function start(cb) {
-        logger.info('Connecting to rabbitmq')
-        var conf = RabbitClient.withDefaultConfig(config);
-
-        RabbitClient.createBroker(conf, components, function(err, _broker) {
-            broker = _broker;
-            cb(err, { broker: broker });
-        })
+  const stop = async () => {
+    logger.info('Disconnecting rabbitmq');
+    if (!broker) {
+      logger.info('No broker was active');
+      return;
     }
+    await broker.shutdown();
+  };
 
-    function stop(cb) {
-        if (!broker) return cb()
-        logger.info('Disconnecting rabbitmq')
-        broker.shutdown(cb)
-    }
-
-    return {
-        start: async.seq(init, validate, start),
-        stop: stop
-    }
-}
+  return {
+    start,
+    stop,
+  };
+};

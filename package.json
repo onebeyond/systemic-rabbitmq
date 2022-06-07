@@ -1,6 +1,6 @@
 {
   "name": "systemic-rabbitmq",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A systemic rabbitmq component",
   "main": "index.js",
   "repository": {
@@ -17,10 +17,13 @@
     "url": "https://github.com/guidesmiths/systemic-rabbitmq/issues"
   },
   "homepage": "https://github.com/guidesmiths/systemic-rabbitmq#readme",
+  "devDependencies": {
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
   "dependencies": {
-    "async": "^2.4.0",
-    "lodash.get": "^4.4.2",
-    "lodash.has": "^4.5.2",
-    "rascal": "^1.1.0"
+    "lodash": "^4.17.21",
+    "rascal": "^14.4.4"
   }
 }
