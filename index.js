@@ -34,8 +34,8 @@ module.exports = options => {
       if (!broker) {
         throw new Error('Broker could not be created');
       }
-console.log('broker', broker)
-      return broker;
+
+      return { broker };
     } catch (error) {
       throw new Error(error);
     }
