@@ -12,7 +12,7 @@
     "systemic",
     "rabbitmq"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/guidesmiths/systemic-rabbitmq/issues"
   },
